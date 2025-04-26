@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Taker</title>
+  <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="site-notes">Site Notes</button>
+      <button class="tab-btn" data-tab="global-notes">Universal Notes</button>
+    </div>
+    
+    <div class="tab-content active" id="site-notes">
+      <div class="selection-box">
+        <h3>Selected Text</h3>
+        <div id="selected-text" class="text-box"></div>
+      </div>
+      
+      <div class="note-input">
+        <h3>Add Note</h3>
+        <textarea id="note-input" placeholder="Enter your note here..."></textarea>
+        <button id="save-note">Save Note</button>
+      </div>
+      
+      <div class="notes-container">
+        <h3>Your Notes for this Site</h3>
+        <div id="site-notes-list" class="notes-list"></div>
+      </div>
+    </div>
+    
+    <div class="tab-content" id="global-notes">
+      <div class="note-input">
+        <h3>Add Universal Note</h3>
+        <textarea id="global-note-input" placeholder="Enter your universal note here..."></textarea>
+        <button id="save-global-note">Save Note</button>
+      </div>
+      
+      <div class="notes-container">
+        <h3>Your Universal Notes</h3>
+        <div id="global-notes-list" class="notes-list"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/popup.js"></script>
+</body>
+</html>

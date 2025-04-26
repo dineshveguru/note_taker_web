@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Note Taker",
+  "version": "1.0.0",
+  "description": "Take notes on any website with selected text",
+  "icons": {
+    "16": "images/eraser.png",
+    "48": "images/notes.png",
+    "128": "images/pencil.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/eraser.png",
+      "48": "images/notes.png",
+      "128": "images/pencil.png"
+    }
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content.js"],
+      "css": ["css/sidebar.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["sidebar.html", "css/*", "js/*", "fonts/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
