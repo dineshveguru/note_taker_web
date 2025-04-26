@@ -1,282 +1,38 @@
-/* Sidebar styles with Open Sans font */
+/* Sidebar styles with Open Sans font - Scoped to prevent leaking into web pages */
 :root {
-  --primary-color: #4285f4;
-  --accent-color: #3367d6;
-  --text-color: #333;
-  --light-text: #777;
-  --border-color: #ddd;
-  --bg-color: #f7f9fc;
-  --card-bg: #fff;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  --sidebar-width: 350px;
+  --nt-primary-color: #4285f4;
+  --nt-accent-color: #3367d6;
+  --nt-text-color: #333;
+  --nt-light-text: #777;
+  --nt-border-color: #ddd;
+  --nt-bg-color: #f7f9fc;
+  --nt-card-bg: #fff;
+  --nt-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --nt-sidebar-width: 350px;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans', sans-serif;
-}
-
-/* Sidebar container */
+/* Only apply these reset styles to the sidebar iframe */
 .note-taker-sidebar {
   position: fixed;
   top: 0;
   right: -400px; /* Start offscreen */
-  width: var(--sidebar-width);
-  height: 100vh;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  z-index: 10000;
+  width: var(--nt-sidebar-width);
+  height: 100%;
+  border: none;
+  z-index: 2147483647; /* Max z-index */
   transition: right 0.3s ease-in-out;
-  overflow-y: auto;
-  box-sizing: border-box;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .note-taker-sidebar.open {
   right: 0;
 }
 
-/* For sidebar.html */
-.sidebar-container {
-  width: 100%;
-  height: 100vh;
-  overflow-y: auto;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  padding: 0;
-  box-sizing: border-box;
-}
+/* All styles below are moved to sidebar.html and properly scoped */
+/* These styles will only affect the sidebar inner content via the sidebar.html file */
 
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.sidebar-header h1 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.icon-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 0 5px;
-}
-
-/* Tab navigation */
-.tabs {
-  display: flex;
-  background-color: var(--card-bg);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.tab-btn {
-  flex: 1;
-  padding: 12px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  color: var(--light-text);
-  position: relative;
-  transition: color 0.3s;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.tab-btn:hover {
-  color: var(--text-color);
-}
-
-.tab-btn.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: var(--primary-color);
-}
-
-.tab-content {
-  display: none;
-  padding: 15px 20px;
-}
-
-.tab-content.active {
-  display: block;
-}
-
-/* Text selection and note input */
-.selection-box h3, .note-input h3, .notes-container h3 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--light-text);
-  margin: 15px 0 8px;
-}
-
-.text-box {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: 12px;
-  border-radius: 6px;
-  margin-bottom: 15px;
-  max-height: 100px;
-  overflow-y: auto;
-  font-size: 14px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-textarea {
-  width: 100%;
-  min-height: 80px;
-  padding: 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  resize: vertical;
-  font-family: 'Open Sans', sans-serif;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-  font-size: 14px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-button {
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: var(--accent-color);
-}
-
-/* Notes display */
-.notes-container {
-  margin-top: 20px;
-}
-
-.notes-list {
-  max-height: calc(100vh - 400px);
-  overflow-y: auto;
-}
-
-.note-item {
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.note-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-.note-text {
-  margin-bottom: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.note-quote {
-  position: relative;
-  padding-right: 24px;
-}
-
-.note-quote {
-  font-style: italic;
-  padding: 8px 12px;
-  border-left: 3px solid var(--primary-color);
-  background-color: rgba(66, 133, 244, 0.05);
-  margin-bottom: 12px;
-  font-size: 13px;
-  color: var(--light-text);
-  border-radius: 0 4px 4px 0;
-}
-
-.note-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.delete-note {
-  background-color: transparent;
-  color: #f44336;
-  padding: 2px 8px;
-  font-size: 12px;
-}
-
-.delete-note:hover {
-  background-color: rgba(244, 67, 54, 0.1);
-}
-
-.note-date {
-  font-size: 11px;
-  color: var(--light-text);
-  margin-top: 8px;
-}
-
-.empty-notes {
-  text-align: center;
-  color: var(--light-text);
-  padding: 20px;
-  font-size: 14px;
-}
-
-/* Add styles for clickable notes */
-.clickable-note {
-  cursor: pointer;
-  position: relative;
-}
-
-.clickable-note::after {
-  content: ''; 
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 16px;
-  height: 16px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234285f4"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
-  background-size: contain;
-  opacity: 0.7;
-  transition: opacity 0.3s;
-}
-
-.clickable-note:hover::after {
-  opacity: 1;
-}
-
-.clickable-note:hover {
-  background-color: var(--bg-color);
+/* For note highlighting in the page */
+.note-taker-highlight {
+  background-color: rgba(255, 255, 0, 0.3);
+  transition: background-color 0.5s ease-in-out;
 }
